@@ -7,3 +7,16 @@ before_install:
 
 script:
     - docker run hakanhuriyet/todo-client npm run test
+
+deploy:
+    edge: true
+    provider: elasticbeanstalk
+    region: "eu-central-1"
+    app: "todo-client"
+    env: "TodoClient-env"
+    bucket_name: "elasticbeanstalk-eu-central-1-853233885721"
+    bucket_path: "todo-client"
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_ACCESS_KEY
