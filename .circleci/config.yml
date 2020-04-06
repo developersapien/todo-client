@@ -10,7 +10,7 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            ssh $DROPLET_USER@$DROPLET_HOST "./deploy_project.sh"
+            ssh $DROPLET_USER@$DROPLET_IP "./deploy_project.sh"
 
 workflows:
   version: 2
