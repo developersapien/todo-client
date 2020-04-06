@@ -11,23 +11,21 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
-    deploy-prod:
-      docker:
-        - image: circleci/node:10
+    deploy:
       steps:
-        - checkout
-        - run: ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP "./deploy_project.sh" 
+        - run:
+          name: Deploy to Digitalocean over SSH
+          command: |
+            ssh $DROPLET_USER@$DROPLET_IP "./deploy_project.sh" 
 workflows:
+  version: 2
     build-and-test:
       jobs:
         - build-and-test
     build-and-deploy:
       jobs:
-        - build
-        - deploy-prod:
+        - deploy:
             filters:
               branches:
                 only:
                   - master
-            requires:
-              - build
