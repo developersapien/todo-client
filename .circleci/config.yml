@@ -19,13 +19,13 @@ jobs:
             ssh $DROPLET_USER@$DROPLET_IP "./deploy_project.sh" 
 workflows:
   version: 2
-    build-and-test:
-      jobs:
-        - build-and-test
-    build-and-deploy:
-      jobs:
-        - deploy:
-            filters:
-              branches:
-                only:
-                  - master
+  build-and-test:
+    jobs:
+      - build-and-test
+  build-and-deploy:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only:
+                - master
