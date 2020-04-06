@@ -11,21 +11,23 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
-    deploy:
-      steps:
-        - run:
-          name: Deploy to Digitalocean over SSH
-          command: |
-            ssh $DROPLET_USER@$DROPLET_IP "./deploy_project.sh" 
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - run:
+        name: Deploy to Digitalocean over SSH
+        command: |
+          ssh $DROPLET_USER@$DROPLET_IP "./deploy_project.sh" 
 workflows:
   version: 2
-  build-and-test:
-    jobs:
-      - build-and-test
   build-and-deploy:
     jobs:
+      - build-and-test
       - deploy:
-          filters:
-            branches:
-              only:
-                - master
+        requires:
+          - build-and-test
+        filters:
+          branches:
+            only:
+              - master
