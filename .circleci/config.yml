@@ -2,7 +2,14 @@ version: 2
 
 jobs:
   build:
-    #...
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm install
+            - run: npm test
   deploy:
     machine:
       enabled: true
@@ -10,7 +17,7 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            ssh $DROPLET_USER@$DROPLET_IP "./deploy_project.sh"
+            ssh $DROPLET_USER@$DROPLET_HOST "<remote deploy command>"
 
 workflows:
   version: 2
