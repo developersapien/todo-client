@@ -24,10 +24,10 @@ workflows:
     build-and-deploy:
       jobs:
         - build
-        - deploy-prod
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - build
+        - deploy-prod:
+            filters:
+              branches:
+                only:
+                  - master
+            requires:
+              - build
