@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 jobs:
   build:
@@ -20,7 +20,7 @@ jobs:
             ssh $DROPLET_USER@$DROPLET_HOST "<remote deploy command>"
 
 workflows:
-  version: 2
+  version: 2.1
   build-and-deploy:
     jobs:
       - build
