@@ -1,7 +1,7 @@
 sudo: required
 addons:
   ssh_known_hosts:
-    - ${DEPLOY_HOST}
+    - 104.248.47.161
 services:
 - docker
 before_install:
